@@ -35,8 +35,10 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     <td>${clientes.telefono}</td>
                     <td>${clientes.deuda}</td>
                     <td>
-                        <button>Agregar Monto</button>
-                        <button>Cancelar Monto</button>
+                        <input type="text" id='txtAgregar' disabled>
+                        <button id="btnActivar" onclick="Activar()">Activar</button>
+                        <button id="btnAgregar" data-id="${doc.id}">Agregar Monton</button>
+                        <button id="btnCancelar">Cancelar Monto</button>
                     </td>
                 </tr>
             `;
@@ -44,6 +46,17 @@ window.addEventListener('DOMContentLoaded', async()=>{
         });
         
         tabla.innerHTML = html;
+
+        const btnsAgregar = tabla.querySelectorAll('#btnAgregar')
+
+        btnsAgregar.forEach(btn => {
+
+            btn.addEventListener('click',e => {
+
+                console.log(e.target.dataset.id);
+            })
+        })
+
     });
 
 });

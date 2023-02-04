@@ -1,3 +1,4 @@
+
 function Visualizar(){
 
     
@@ -14,4 +15,21 @@ function Visualizar(){
 
     }
     
+}
+
+function Activar() {
+
+    if(document.getElementById('txtAgregar').disabled==false){
+
+        
+        document.getElementById('txtAgregar').disabled = true;
+
+    }
+    else{
+
+        
+        document.getElementById('txtAgregar').disabled = false;
+
+
+    }   
 }
