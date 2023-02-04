@@ -1,10 +1,26 @@
-import { getClientes } from "./firebase.js";
+import { getClientes, NewCliente } from "./firebase.js";
 
 let tabla = document.getElementById('listaclientes')
+let form = document.getElementById('NuevoCliente')
+
+form.addEventListener('submit',(e)=>{
+
+    e.preventDefault();
+
+    const txtnombre = form[0]
+    const txttelefono = form[1]
+    const txtmonto = form[2]
+
+    NewCliente(txtnombre.value,txttelefono.value,txtmonto.value);
+    form.reset();
+    form.setAttribute('hidden','')
+
+})
+
 window.addEventListener('DOMContentLoaded', async()=>{
 
-    const querySnapchot = await getClientes();
-
+    //const querySnapchot = await getClientes();
+    getClientes((querySnapchot) => {
     let html = "";
     let i = 0
     querySnapchot.forEach(doc => {
@@ -25,7 +41,10 @@ window.addEventListener('DOMContentLoaded', async()=>{
                 </tr>
             `;
 
-            tabla.innerHTML = html;
+        });
+        
+        tabla.innerHTML = html;
     });
 
 });
+

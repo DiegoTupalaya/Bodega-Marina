@@ -13,15 +13,15 @@
 <body>
   <button onclick="Visualizar();">Añadir Nuevo Cliente</button>
 
-  <div id="NuevoCliente" hidden>
+  <form id="NuevoCliente" hidden>
     <label for="">Nombre</label>
-    <input type="text">
+    <input type="text" id='txtNombre'>
     <label for="">Telefono</label>
-    <input type="number">
-    <label for=""></label>
-    <input type="number">
+    <input type="number" id='txtTelefono'>
+    <label for="">Monto</label>
+    <input type="number" step="0.1" id='txtMonto'>
     <input type="submit" value="Añadir Nuevo Cliente">
-  </div>
+  </form>
   <hr>
   <table class="table">
     <thead>
