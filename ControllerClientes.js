@@ -1,4 +1,4 @@
-import { getClientes, NewCliente } from "./firebase.js";
+import { getCliente, getClientes, NewCliente, updateCliente} from "./firebase.js";
 
 let tabla = document.getElementById('listaclientes')
 let form = document.getElementById('NuevoCliente')
@@ -35,10 +35,11 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     <td>${clientes.telefono}</td>
                     <td>${clientes.deuda}</td>
                     <td>
-                        <input type="text" id='txtAgregar' disabled>
-                        <button id="btnActivar" onclick="Activar()">Activar</button>
-                        <button id="btnAgregar" data-id="${doc.id}">Agregar Monton</button>
-                        <button id="btnCancelar">Cancelar Monto</button>
+                        <input type="text" id='txtAgregar${i}' disabled>
+                        <button id="btnActivar" onclick="Activar(${i})">Activar</button>
+                        <button id="btnAgregar" data-id="${doc.id}" data-orden="${i}">Agregar Monton</button>
+                        <button id="btnDescontar" data-id="${doc.id}" data-orden="${i}">Descontar Monton</button>
+                        <button id="btnCancelar" data-id="${doc.id}">Cancelar Monto</button>
                     </td>
                 </tr>
             `;
@@ -48,16 +49,57 @@ window.addEventListener('DOMContentLoaded', async()=>{
         tabla.innerHTML = html;
 
         const btnsAgregar = tabla.querySelectorAll('#btnAgregar')
+        const btnsDescontar = tabla.querySelectorAll('#btnDescontar')
+        const btnsCancelar = tabla.querySelectorAll('#btnCancelar')
 
-        btnsAgregar.forEach(btn => {
+        btnsAgregar.forEach( btnA => {
 
-            btn.addEventListener('click',e => {
+            btnA.addEventListener('click',async (e) => {
 
-                console.log(e.target.dataset.id);
+                //console.log(e.target.dataset.id);
+                let id = e.target.dataset.id;
+                let orden = e.target.dataset.orden;
+                let valor = document.getElementById('txtAgregar'+orden).value;
+                
+                const cliente = await getCliente(id);
+                const deuda = cliente.data().deuda;
+
+                let nueva_deuda= parseFloat(deuda) + parseFloat(valor)
+                console.log(nueva_deuda);
+
+                updateCliente(id,{ deuda: nueva_deuda });
+            })
+        })
+
+        btnsDescontar.forEach(btnD =>{
+
+            btnD.addEventListener('click', async(e) =>{
+
+                //console.log(e.target.dataset.id);
+                let id = e.target.dataset.id;
+                let orden = e.target.dataset.orden;
+                let valor = document.getElementById('txtAgregar'+orden).value;
+                
+                const cliente = await getCliente(id);
+                const deuda = cliente.data().deuda;
+
+                let nueva_deuda= parseFloat(deuda) - parseFloat(valor)
+                console.log(nueva_deuda);
+
+                updateCliente(id,{ deuda: nueva_deuda });
+            })
+        })
+
+        btnsCancelar.forEach(btnC => {
+
+            btnC.addEventListener('click', e =>{
+
+                let id = e.target.dataset.id;
+
+                updateCliente(id,{ deuda: 0 });
             })
         })
 
     });
 
 });
-

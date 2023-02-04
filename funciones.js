@@ -17,18 +17,18 @@ function Visualizar(){
     
 }
 
-function Activar() {
+function Activar(i) {
 
-    if(document.getElementById('txtAgregar').disabled==false){
+    if(document.getElementById('txtAgregar'+i).disabled==false){
 
         
-        document.getElementById('txtAgregar').disabled = true;
+        document.getElementById('txtAgregar'+i).disabled = true;
 
     }
     else{
 
         
-        document.getElementById('txtAgregar').disabled = false;
+        document.getElementById('txtAgregar'+i).disabled = false;
 
 
     }   
