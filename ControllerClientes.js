@@ -28,7 +28,4 @@ window.addEventListener('DOMContentLoaded', async()=>{
             tabla.innerHTML = html;
     });
 
-    /*querySnapchot.forEach(element => {
-        
-    });*/
-})
+});
