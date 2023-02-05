@@ -40,6 +40,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                         <button id="btnAgregar" data-id="${doc.id}" data-orden="${i}">Agregar Monton</button>
                         <button id="btnDescontar" data-id="${doc.id}" data-orden="${i}">Descontar Monton</button>
                         <button id="btnCancelar" data-id="${doc.id}">Cancelar Monto</button>
+                        <button id="btnGuardar">Guardar</button>
                     </td>
                 </tr>
             `;
