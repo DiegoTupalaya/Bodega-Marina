@@ -31,16 +31,16 @@ window.addEventListener('DOMContentLoaded', async()=>{
             
                 <tr>
                     <th scope="row">${i}</th>
-                    <td>${clientes.nombre}</td>
-                    <td>${clientes.telefono}</td>
-                    <td>${clientes.deuda}</td>
+                    <td id="tdNombre${i}">${clientes.nombre}</td>
+                    <td id="tdTelefono${i}">${clientes.telefono}</td>
+                    <td id="tdDeuda${i}">${clientes.deuda}</td>
                     <td>
                         <input type="text" id='txtAgregar${i}' disabled>
                         <button id="btnActivar" onclick="Activar(${i})">Activar</button>
                         <button id="btnAgregar" data-id="${doc.id}" data-orden="${i}">Agregar Monton</button>
                         <button id="btnDescontar" data-id="${doc.id}" data-orden="${i}">Descontar Monton</button>
                         <button id="btnCancelar" data-id="${doc.id}">Cancelar Monto</button>
-                        <button id="btnGuardar">Guardar</button>
+                        <button id="btnGuardar" onclick="Guardar(${i})">Guardar</button>
                     </td>
                 </tr>
             `;

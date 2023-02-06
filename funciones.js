@@ -33,3 +33,17 @@ function Activar(i) {
 
     }   
 }
+
+function Guardar(i) {
+    
+    window.jsPDF = window.jspdf.jsPDF;
+    const doc_pdf = new jsPDF();
+
+    let nombre = document.getElementById('tdNombre'+i).innerHTML
+    let telefono = document.getElementById('tdTelefono'+i).innerHTML
+    let deuda = document.getElementById('tdDeuda'+i).innerHTML
+
+
+    doc_pdf.text("Nombre:" + nombre + "\n" + "Telefono:" + telefono + "\n" + "Deuda:" + deuda, 10, 10);
+    doc_pdf.save("Recibo de "+ nombre +".pdf");
+}
