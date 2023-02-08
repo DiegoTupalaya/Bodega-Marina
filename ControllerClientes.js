@@ -37,8 +37,8 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     <td>
                         <input type="text" id='txtAgregar${i}' disabled>
                         <button id="btnActivar" onclick="Activar(${i})">Activar</button>
-                        <button id="btnAgregar" data-id="${doc.id}" data-orden="${i}">Agregar Monton</button>
-                        <button id="btnDescontar" data-id="${doc.id}" data-orden="${i}">Descontar Monton</button>
+                        <button id="btnAgregar" name="btnAgregar" data-id="${doc.id}" data-orden="${i}" disabled>Agregar Monton</button>
+                        <button id="btnDescontar" name="btnDescontar" data-id="${doc.id}" data-orden="${i}" disabled>Descontar Monton</button>
                         <button id="btnCancelar" data-id="${doc.id}">Cancelar Monto</button>
                         <button id="btnGuardar" onclick="Guardar(${i})">Guardar</button>
                     </td>
