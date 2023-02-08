@@ -33,14 +33,14 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     <th scope="row">${i}</th>
                     <td id="tdNombre${i}">${clientes.nombre}</td>
                     <td id="tdTelefono${i}">${clientes.telefono}</td>
-                    <td id="tdDeuda${i}">${clientes.deuda}</td>
+                    <td id="tdDeuda${i}">S/ ${clientes.deuda}</td>
                     <td>
-                        <input type="text" id='txtAgregar${i}' disabled>
-                        <button id="btnActivar" onclick="Activar(${i})">Activar</button>
-                        <button id="btnAgregar" name="btnAgregar" data-id="${doc.id}" data-orden="${i}" disabled>Agregar Monton</button>
-                        <button id="btnDescontar" name="btnDescontar" data-id="${doc.id}" data-orden="${i}" disabled>Descontar Monton</button>
-                        <button id="btnCancelar" data-id="${doc.id}">Cancelar Monto</button>
-                        <button id="btnGuardar" onclick="Guardar(${i})">Guardar</button>
+                        <input type="number" step="0.1" min="0.1" id='txtAgregar${i}' disabled required>
+                        <button class="btn btn-warning" id="btnActivar" onclick="Activar(${i})">Activar</button>
+                        <button class="btn btn-secondary" id="btnAgregar" name="btnAgregar" data-id="${doc.id}" data-orden="${i}" disabled>Agregar Monton</button>
+                        <button class="btn btn-secondary" id="btnDescontar" name="btnDescontar" data-id="${doc.id}" data-orden="${i}" disabled>Descontar Monton</button>
+                        <button class="btn btn-danger" id="btnCancelar" data-id="${doc.id}" data-nombre="${clientes.nombre}">Cancelar Monto</button>
+                        <button class="btn btn-success" id="btnGuardar" onclick="Guardar(${i})">Guardar</button>
                     </td>
                 </tr>
             `;
@@ -61,14 +61,24 @@ window.addEventListener('DOMContentLoaded', async()=>{
                 let id = e.target.dataset.id;
                 let orden = e.target.dataset.orden;
                 let valor = document.getElementById('txtAgregar'+orden).value;
+
+                if(valor === ''){
+
+                    alert('INGRESE VALOR PARA AGREGAR')
+                }
+                else{
+
+                    const cliente = await getCliente(id);
+                    const deuda = cliente.data().deuda;
+
+                    let nueva_deuda= parseFloat(deuda) + parseFloat(valor)
+                    let nueva_deuda_decimal = nueva_deuda.toFixed(2)
+                    console.log(nueva_deuda_decimal);
+
+                    updateCliente(id,{ deuda: nueva_deuda_decimal });
+                }
                 
-                const cliente = await getCliente(id);
-                const deuda = cliente.data().deuda;
-
-                let nueva_deuda= parseFloat(deuda) + parseFloat(valor)
-                console.log(nueva_deuda);
-
-                updateCliente(id,{ deuda: nueva_deuda });
+                
             })
         })
 
@@ -76,18 +86,39 @@ window.addEventListener('DOMContentLoaded', async()=>{
 
             btnD.addEventListener('click', async(e) =>{
 
-                //console.log(e.target.dataset.id);
+                
                 let id = e.target.dataset.id;
                 let orden = e.target.dataset.orden;
                 let valor = document.getElementById('txtAgregar'+orden).value;
                 
-                const cliente = await getCliente(id);
-                const deuda = cliente.data().deuda;
+                if (valor == '') {
 
-                let nueva_deuda= parseFloat(deuda) - parseFloat(valor)
-                console.log(nueva_deuda);
+                    alert('INGRESE VALOR PARA DESCONTAR')
+                    
+                } else {
+                    
 
-                updateCliente(id,{ deuda: nueva_deuda });
+                    const cliente = await getCliente(id);
+                    const deuda = cliente.data().deuda;
+
+                    let nueva_deuda= parseFloat(deuda) - parseFloat(valor)
+
+                    if(nueva_deuda < 0){
+
+                        alert('EL VALOR DEL DESCUENTO ES NEGATIVO\nEL VALOR QUE SOBRA ES: '+(nueva_deuda.toFixed(2)*-1))
+
+                    }
+                    else{
+
+                        let nueva_deuda_decimal = nueva_deuda.toFixed(2)
+                        console.log(nueva_deuda_decimal);
+
+                        updateCliente(id,{ deuda: nueva_deuda_decimal });
+
+                    }
+                    
+                }
+                
             })
         })
 
@@ -96,8 +127,15 @@ window.addEventListener('DOMContentLoaded', async()=>{
             btnC.addEventListener('click', e =>{
 
                 let id = e.target.dataset.id;
+                let cliente = e.target.dataset.nombre;
 
-                updateCliente(id,{ deuda: 0 });
+                let confirmacion = confirm("ESTA SEGURO QUE DESEA CANCELAR LA DEUDA DE "+cliente.toUpperCase())
+                
+                if (confirmacion == true) {
+
+                    updateCliente(id,{ deuda: 0 });
+                    
+                }
             })
         })
 
