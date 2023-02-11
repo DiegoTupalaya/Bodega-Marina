@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BODEGA MARINA</title>
     <script type="module" src="./ControllerClientes.js"></script>
     <script src="./funciones.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -13,6 +13,7 @@
 </head>
 <body>
   <button class="btn btn-primary" onclick="Visualizar();">Añadir Nuevo Cliente</button>
+  <button class="btn btn-primary" onclick="Editar();">Editar Cliente</button>
 
   <form id="NuevoCliente" hidden>
     <label for="">Nombre</label>
@@ -22,6 +23,13 @@
     <label for="">Monto</label>
     <input type="number" step="0.1" min="0.1" id='txtMonto' required>
     <input class="btn btn-info" type="submit" value="Añadir Nuevo Cliente">
+  </form>
+  <form id="EditarCliente" hidden>
+    <label for="">Nombre</label>
+    <input type="text" id='txtNombre' hidden>
+    <label for="">Telefono</label>
+    <input type="tel" id='txtTelefono' min="1" pattern="[0-9]{9}" hidden>
+    <input class="btn btn-info" type="submit" value="Editar Cliente">
   </form>
   <hr>
   <table class="table">
