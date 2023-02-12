@@ -1,4 +1,4 @@
-import { getCliente, getClientes, NewCliente, updateCliente, addFecha} from "./firebase.js";
+import { getCliente, getClientes, NewCliente, updateCliente, addFecha, addDeuda} from "./firebase.js";
 
 let tabla = document.getElementById('listaclientes')
 let form = document.getElementById('NuevoCliente')
@@ -73,6 +73,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
 
                     let fecha = new Date();
                     console.log(fecha);
+                    let valorA = parseFloat(valor)
 
                     const cliente = await getCliente(id);
                     const deuda = cliente.data().deuda;
@@ -82,7 +83,8 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     console.log(nueva_deuda_decimal);
 
                     updateCliente(id,{ deuda: nueva_deuda_decimal });
-                    addFecha(id,parseFloat(valor),fecha)
+                    await addFecha(id,fecha)
+                    await addDeuda(id,valorA)
                 }
                 
                 
@@ -106,7 +108,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     
 
                     const cliente = await getCliente(id);
-                    const deuda = cliente.data().deuda;
+                    let deuda = cliente.data().deuda;
 
                     let nueva_deuda= parseFloat(deuda) - parseFloat(valor)
 
@@ -126,9 +128,9 @@ window.addEventListener('DOMContentLoaded', async()=>{
                         console.log(valor);
 
                         updateCliente(id,{ deuda: nueva_deuda_decimal });
-                        addFecha(id,valorD,fecha);
+                        await addFecha(id,fecha)
+                        await addDeuda(id,valorD)
                         
-
                     }
                     
                 }

@@ -39,7 +39,10 @@
 
   export const getCliente = (id) => getDoc(doc(db,'Clientes',id))
 
-  export const addFecha = (id,deuda,fecha) =>  updateDoc(doc(db,'Clientes',id),{
-    "detalle.deuda" : arrayUnion(deuda),
+  export const addFecha = (id,fecha) =>  updateDoc(doc(db,'Clientes',id),{
     "detalle.fecha" : arrayUnion(fecha),
   });
+
+  export const addDeuda = (id,deuda) => updateDoc(doc(db,'Clientes',id),{
+    "detalle.deuda" : arrayUnion(deuda),
+  })
