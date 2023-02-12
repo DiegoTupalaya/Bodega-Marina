@@ -82,7 +82,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     console.log(nueva_deuda_decimal);
 
                     updateCliente(id,{ deuda: nueva_deuda_decimal });
-                    await addFecha(id,parseFloat(valor),fecha)
+                    addFecha(id,parseFloat(valor),fecha)
                 }
                 
                 
@@ -126,7 +126,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                         console.log(valor);
 
                         updateCliente(id,{ deuda: nueva_deuda_decimal });
-                        await addFecha(id,valorD,fecha);
+                        addFecha(id,valorD,fecha);
                         
 
                     }
