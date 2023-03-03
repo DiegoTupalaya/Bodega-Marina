@@ -190,7 +190,9 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     doc_pdf.text("FECHA", 60, 40);
                     doc_pdf.text("OPERACION", 90, 40);
                     doc_pdf.text("MONTO", 135, 40);
+                    
                     let index2 = 1;
+                    let index3 = 1;
 
                     for (let index = 0; index < filas; index++) {
                         
@@ -222,14 +224,34 @@ window.addEventListener('DOMContentLoaded', async()=>{
                             doc_pdf.text("S/ "+dmonto, 136, (index2)*10);
 
                             index2 ++;
-                        }else if((index+5)*10 > 295){
+                        }
+                        else if((index+5)*10 == 590){
+
+                            doc_pdf.addPage();
+                            
+                            doc_pdf.text(fecha, 58.5, (index3)*10);
+                            doc_pdf.text(operacion, 88.5, (index3)*10);
+                            doc_pdf.text("S/ "+dmonto, 136, (index3)*10);
+
+                            index3 ++;
+                        }
+                        else if((index+5)*10 > 300){
 
                             doc_pdf.text(fecha, 58.5, (index2)*10);
                             doc_pdf.text(operacion, 88.5, (index2)*10);
                             doc_pdf.text("S/ "+dmonto, 136, (index2)*10);
 
                             index2 ++;
-                        }else{
+                        }
+                        else if((index+5)*10 > 590){
+
+                            doc_pdf.text(fecha, 58.5, (index3)*10);
+                            doc_pdf.text(operacion, 88.5, (index3)*10);
+                            doc_pdf.text("S/ "+dmonto, 136, (index3)*10);
+
+                            index3 ++;
+                        }
+                        else{
 
                             doc_pdf.text(fecha, 58.5, (index+5)*10);
                             doc_pdf.text(operacion, 88.5, (index+5)*10);
@@ -245,6 +267,9 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     }
                     else if((filas+5)*10 > 300){
                         doc_pdf.text("TOTAL: "+deuda, 10, (index2)*10);
+                    }
+                    else if((filas+5)*10 > 590){
+                        doc_pdf.text("TOTAL: "+deuda, 10, (index3)*10);
                     }
                     else{
                         doc_pdf.text("TOTAL: "+deuda, 10, (filas+5)*10);
