@@ -81,6 +81,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     let nueva_deuda= parseFloat(deuda) + parseFloat(valor)
                     let nueva_deuda_decimal = nueva_deuda.toFixed(2)
                     console.log(nueva_deuda_decimal);
+                    console.log(valorA)
 
                     updateCliente(id,{ deuda: nueva_deuda_decimal });
                     await addFecha(id,fecha)
@@ -189,6 +190,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     doc_pdf.text("FECHA", 60, 40);
                     doc_pdf.text("OPERACION", 90, 40);
                     doc_pdf.text("MONTO", 135, 40);
+                    let index2 = 1;
 
                     for (let index = 0; index < filas; index++) {
                         
@@ -211,14 +213,42 @@ window.addEventListener('DOMContentLoaded', async()=>{
 
                         let fecha = dia + "/" + mes + "/"+ year; 
 
-                        doc_pdf.text(fecha, 58.5, (index+5)*10);
-                        doc_pdf.text(operacion, 88.5, (index+5)*10);
-                        doc_pdf.text("S/ "+dmonto, 136, (index+5)*10);
+                        if((index+5)*10 == 300){
 
-                        
+                            doc_pdf.addPage();
+                            
+                            doc_pdf.text(fecha, 58.5, (index2)*10);
+                            doc_pdf.text(operacion, 88.5, (index2)*10);
+                            doc_pdf.text("S/ "+dmonto, 136, (index2)*10);
+
+                            index2 ++;
+                        }else if((index+5)*10 > 295){
+
+                            doc_pdf.text(fecha, 58.5, (index2)*10);
+                            doc_pdf.text(operacion, 88.5, (index2)*10);
+                            doc_pdf.text("S/ "+dmonto, 136, (index2)*10);
+
+                            index2 ++;
+                        }else{
+
+                            doc_pdf.text(fecha, 58.5, (index+5)*10);
+                            doc_pdf.text(operacion, 88.5, (index+5)*10);
+                            doc_pdf.text("S/ "+dmonto, 136, (index+5)*10);
+                        }   
                     }
 
-                    doc_pdf.text("TOTAL: "+deuda, 10, (filas+5)*10);
+                    
+                    if((filas+5)*10 == 300){
+
+                        doc_pdf.addPage();
+                        doc_pdf.text("TOTAL: "+deuda, 10, 10);
+                    }
+                    else if((filas+5)*10 > 300){
+                        doc_pdf.text("TOTAL: "+deuda, 10, (index2)*10);
+                    }
+                    else{
+                        doc_pdf.text("TOTAL: "+deuda, 10, (filas+5)*10);
+                    }
                     doc_pdf.save("Recibo de "+ nombre +".pdf");
 
                 }
