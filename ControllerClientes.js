@@ -39,8 +39,8 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     <td>
                         <input type="number" step="0.1" min="0.1" id='txtAgregar${i}' disabled required>
                         <button class="btn btn-warning" id="btnActivar" onclick="Activar(${i})">Activar</button>
-                        <button class="btn btn-secondary" id="btnAgregar" name="btnAgregar" data-id="${doc.id}" data-orden="${i}" disabled>Agregar Monton</button>
-                        <button class="btn btn-secondary" id="btnDescontar" name="btnDescontar" data-id="${doc.id}" data-orden="${i}" disabled>Descontar Monton</button>
+                        <button class="btn btn-secondary" id="btnAgregar" name="btnAgregar" data-id="${doc.id}" data-orden="${i}" hidden>Agregar Monton</button>
+                        <button class="btn btn-secondary" id="btnDescontar" name="btnDescontar" data-id="${doc.id}" data-orden="${i}" hidden>Descontar Monton</button>
                         <button class="btn btn-danger" id="btnCancelar" data-id="${doc.id}" data-nombre="${clientes.nombre}">Cancelar Monto</button>
                         <button class="btn btn-success" id="btnGuardar" data-id="${doc.id}" data-orden="${i}">Guardar</button>
                     </td>

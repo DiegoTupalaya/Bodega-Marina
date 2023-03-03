@@ -23,16 +23,16 @@ function Activar(i) {
 
         
         document.getElementById('txtAgregar'+i).disabled = true;
-        document.getElementsByName('btnAgregar')[i-1].disabled = true
-        document.getElementsByName('btnDescontar')[i-1].disabled = true
+        document.getElementsByName('btnAgregar')[i-1].setAttribute('hidden','');
+        document.getElementsByName('btnDescontar')[i-1].setAttribute('hidden','');
 
     }
     else{
 
         
         document.getElementById('txtAgregar'+i).disabled = false;
-        document.getElementsByName('btnAgregar')[i-1].disabled = false
-        document.getElementsByName('btnDescontar')[i-1].disabled = false
+        document.getElementsByName('btnAgregar')[i-1].removeAttribute('hidden');
+        document.getElementsByName('btnDescontar')[i-1].removeAttribute('hidden');
 
     }   
 }
