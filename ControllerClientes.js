@@ -235,7 +235,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
 
                             index3 ++;
                         }
-                        else if((index+5)*10 > 300){
+                        else if((index+5)*10 > 300 && (index+5)*10 < 590){
 
                             doc_pdf.text(fecha, 58.5, (index2)*10);
                             doc_pdf.text(operacion, 88.5, (index2)*10);
@@ -265,10 +265,12 @@ window.addEventListener('DOMContentLoaded', async()=>{
                         doc_pdf.addPage();
                         doc_pdf.text("TOTAL: "+deuda, 10, 10);
                     }
-                    else if((filas+5)*10 > 300){
+                    else if((filas+5)*10 > 300 && (filas+5)*10 < 590){
                         doc_pdf.text("TOTAL: "+deuda, 10, (index2)*10);
                     }
-                    else if((filas+5)*10 > 590){
+                    else if((filas+5)*10 == 590){
+                        doc_pdf.text("TOTAL: "+deuda, 10, 10);
+                    }else if((filas+5)*10 > 590){
                         doc_pdf.text("TOTAL: "+deuda, 10, (index3)*10);
                     }
                     else{
