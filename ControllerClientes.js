@@ -77,15 +77,17 @@ window.addEventListener('DOMContentLoaded', async()=>{
 
                     const cliente = await getCliente(id);
                     const deuda = cliente.data().deuda;
+                    let deudas = cliente.data().detalle.deuda;
 
                     let nueva_deuda= parseFloat(deuda) + parseFloat(valor)
                     let nueva_deuda_decimal = nueva_deuda.toFixed(2)
-                    console.log(nueva_deuda_decimal);
-                    console.log(valorA)
+                    deudas.push(valorA)
+                    
 
                     updateCliente(id,{ deuda: nueva_deuda_decimal });
                     await addFecha(id,fecha)
-                    await addDeuda(id,valorA)
+                    await addDeuda(id,deudas)
+                    
                 }
                 
                 
@@ -123,14 +125,16 @@ window.addEventListener('DOMContentLoaded', async()=>{
                         let fecha = new Date();
                         console.log(fecha);
                         let valorD = parseFloat(valor)*-1;
+                        let deudas = cliente.data().detalle.deuda;
 
                         let nueva_deuda_decimal = nueva_deuda.toFixed(2)
                         console.log(nueva_deuda_decimal);
                         console.log(valor);
 
+                        deudas.push(valorD)
                         updateCliente(id,{ deuda: nueva_deuda_decimal });
                         await addFecha(id,fecha)
-                        await addDeuda(id,valorD)
+                        await addDeuda(id,deudas)
                         
                     }
                     

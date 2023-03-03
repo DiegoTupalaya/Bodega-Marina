@@ -43,6 +43,6 @@
     "detalle.fecha" : arrayUnion(fecha),
   });
 
-  export const addDeuda = (id,deuda) => updateDoc(doc(db,'Clientes',id),{
-    "detalle.deuda" : arrayUnion(deuda),
+  export const addDeuda = async(id,deudas) => await updateDoc(doc(db,'Clientes',id),{
+    "detalle.deuda" : deudas,
   })
