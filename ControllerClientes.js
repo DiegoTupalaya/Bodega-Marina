@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     <td id="tdTelefono${i}">${clientes.telefono}</td>
                     <td id="tdDeuda${i}">S/ ${clientes.deuda}</td>
                     <td>
-                        <input type="number" step="0.1" min="0.1" id='txtAgregar${i}' disabled required>
+                        <input type="number" step="0.1" min="0.1" id='txtAgregar${i}' disabled required placeholder="Ingrese valor">
                         <button class="btn btn-warning" id="btnActivar" onclick="Activar(${i})">Activar</button>
                         <button class="btn btn-secondary" id="btnAgregar" name="btnAgregar" data-id="${doc.id}" data-orden="${i}" hidden>Agregar Monton</button>
                         <button class="btn btn-secondary" id="btnDescontar" name="btnDescontar" data-id="${doc.id}" data-orden="${i}" hidden>Descontar Monton</button>
