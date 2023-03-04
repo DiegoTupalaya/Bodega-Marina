@@ -32,9 +32,10 @@
                                                                                                           "deuda":[parseFloat(deuda)]
                                                                                                         }
                                                                                               })
-
-  export const getClientes = (callback) => onSnapshot(collection(db, 'Clientes'),callback);
-
+  
+         const q = query(collection(db, 'Clientes'),orderBy("nombre", "asc"));                                                                                     
+  export const getClientes = (callback) => onSnapshot(q,callback);
+  
   export const updateCliente = (id,monto) => updateDoc(doc(db,'Clientes',id), monto);
 
   export const getCliente = (id) => getDoc(doc(db,'Clientes',id))
