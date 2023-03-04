@@ -4,7 +4,7 @@
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
-  import { getFirestore, collection, getDocs, addDoc, onSnapshot, updateDoc, doc , getDoc, arrayUnion} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
+  import { getFirestore, collection, getDocs, addDoc, onSnapshot, updateDoc, doc , getDoc, arrayUnion,query,orderBy} from "https://www.gstatic.com/firebasejs/9.17.1/firebase-firestore.js";
 
 
 
@@ -35,7 +35,7 @@
   
          const q = query(collection(db, 'Clientes'),orderBy("nombre", "asc"));                                                                                     
   export const getClientes = (callback) => onSnapshot(q,callback);
-  
+
   export const updateCliente = (id,monto) => updateDoc(doc(db,'Clientes',id), monto);
 
   export const getCliente = (id) => getDoc(doc(db,'Clientes',id))
