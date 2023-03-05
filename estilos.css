@@ -5,3 +5,26 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=number] { -moz-appearance:textfield; }
+
+.show-grid{
+  padding-top: 15px;
+  justify-content: center;
+  
+}
+
+.show-grid .btn{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btns{
+
+  text-align: center;
+  justify-content: center;
+
+}
+
+.tabla{
+
+  padding-top: 50px;
+}
