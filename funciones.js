@@ -31,6 +31,7 @@ function Activar(i) {
 
         
         document.getElementById('txtAgregar'+i).disabled = false;
+        document.getElementById('txtAgregar'+i).focus();
         document.getElementsByName('btnAgregar')[i-1].removeAttribute('hidden');
         document.getElementsByName('btnDescontar')[i-1].removeAttribute('hidden');
 
