@@ -25,13 +25,14 @@ window.addEventListener('DOMContentLoaded', async()=>{
     getClientes((querySnapchot) => {
     let html = "";
     let i = 0
+    let total= 0;
     querySnapchot.forEach(doc => {
             let clientes = doc.data();
             
             i++
             html += `
             
-                <tr>
+                <tr class="cliente">
                     <th scope="row">${i}</th>
                     <td id="tdNombre${i}">${clientes.nombre}</td>
                     <td id="tdTelefono${i}">${clientes.telefono}</td>
@@ -46,10 +47,12 @@ window.addEventListener('DOMContentLoaded', async()=>{
                     </td>
                 </tr>
             `;
-
+        let deuda = parseFloat(clientes.deuda);
+        total = deuda + total;
         });
         
         tabla.innerHTML = html;
+        document.getElementById("txttotal").innerHTML = total.toFixed(2)
 
         const btnsAgregar = tabla.querySelectorAll('#btnAgregar')
         const btnsDescontar = tabla.querySelectorAll('#btnDescontar')
