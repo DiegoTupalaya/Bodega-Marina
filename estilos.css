@@ -35,7 +35,7 @@ input[type=number] { -moz-appearance:textfield; }
 
 .my-custom-scrollbar {
   position: relative;
-  height: 440px;
+  height: 65vh;
   overflow: auto;
   }
 
